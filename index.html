@@ -1,100 +1,244 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>MSP Research Tools</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg: #f3f6fb;
+      --surface: rgba(255, 255, 255, 0.92);
+      --border: rgba(180, 194, 214, 0.35);
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #1f6fb2;
+      --accent-soft: #e8f0fe;
+      --shadow-1: 0 8px 24px rgba(0,0,0,0.06);
+      --shadow-2: 0 16px 40px rgba(0,0,0,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Google Sans', sans-serif;
       background: linear-gradient(180deg, #f7f9fc, #eef3f8);
-      color: #1a1a1a;
+      color: var(--text);
     }
 
-    header {
-      padding: 28px 32px;
-      background: white;
+    /* ===== TOP BAR ===== */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      padding: 0 28px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e7eb;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
     }
 
-    .container {
-      padding: 40px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
       max-width: 1200px;
       margin: auto;
+      padding: 36px 28px 10px;
+    }
+
+    .hero-box {
+      background: rgba(255,255,255,0.85);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: var(--shadow-1);
+      border: 1px solid var(--border);
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* ===== GRID ===== */
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px 28px 40px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 16px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
     }
 
+    /* ===== CARD ===== */
     .card {
-      background: white;
-      border-radius: 18px;
-      padding: 22px;
+      display: block;
       text-decoration: none;
       color: inherit;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+      background: var(--surface);
+      border-radius: 18px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-1);
       transition: all 0.2s ease;
+      position: relative;
     }
 
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-2);
+      border-color: #c7d2fe;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      border-radius: 18px 18px 0 0;
+      background: linear-gradient(90deg, #1f6fb2, #3b82f6);
     }
 
     .tag {
       font-size: 11px;
-      background: #e8f0fe;
-      color: #3367d6;
+      background: var(--accent-soft);
+      color: var(--accent);
       padding: 4px 10px;
       border-radius: 999px;
       display: inline-block;
       margin-bottom: 10px;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .title {
-      font-size: 17px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 700;
       margin-bottom: 6px;
     }
 
     .desc {
       font-size: 13px;
-      color: #5f6368;
+      color: var(--muted);
+      margin-bottom: 14px;
     }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .open {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
   </style>
+
 </head>
 
 <body>
 
-<header>
-  MSP RESEARCH TOOLS
-</header>
+<!-- ===== HEADER ===== -->
 
-<div class="container">
+<div class="topbar">
+  <div class="brand">
+    <img src="logo.png" class="brand-logo" alt="MSP Logo">
+    <div class="brand-title">MSP Research Tools</div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+
+<div class="hero">
+  <div class="hero-box">
+    <div class="hero-title">Research Tools Dashboard</div>
+    <div class="hero-desc">
+      Select a tool to launch. All tools share a consistent interface and design system.
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOOLS ===== -->
+
+<div class="section">
+  <div class="section-title">Available Tools</div>
+
   <div class="grid">
 
-    <a href="https://u3621195.github.io/perceptual-brandmap/" class="card">
-      <div class="tag">LIVE</div>
-      <div class="title">Halo Effect Analyzer</div>
-      <div class="desc">Analyze attribute influence and bias</div>
-    </a>
+```
+<!-- Halo -->
+<a href="https://u3621195.github.io/perceptual-brandmap/" class="card">
+  <div class="tag">LIVE</div>
+  <div class="title">Halo Effect Analyzer</div>
+  <div class="desc">Analyze attribute influence and bias</div>
+  <div class="footer">
+    <span>Brand Analysis</span>
+    <span class="open">Open →</span>
+  </div>
+</a>
 
-    <a href="https://u3621195.github.io/significance-testing/" class="card">
-      <div class="tag">LIVE</div>
-      <div class="title">Significance Testing Tool</div>
-      <div class="desc">Run statistical comparisons and significance tests</div>
-    </a>
+<!-- Sig Test -->
+<a href="https://u3621195.github.io/significance-testing/" class="card">
+  <div class="tag">LIVE</div>
+  <div class="title">Significance Testing Tool</div>
+  <div class="desc">Run statistical comparisons and significance tests</div>
+  <div class="footer">
+    <span>Stat Testing</span>
+    <span class="open">Open →</span>
+  </div>
+</a>
+```
 
   </div>
 </div>
