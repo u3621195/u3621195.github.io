@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -12,236 +11,281 @@
 
   <style>
     :root {
-      --bg: #f3f6fb;
-      --surface: rgba(255, 255, 255, 0.92);
-      --border: rgba(180, 194, 214, 0.35);
-      --text: #1f2937;
-      --muted: #6b7280;
-      --accent: #1f6fb2;
+      --app-bg: #edf2fb;
+      --panel-bg: #ffffff;
+      --panel-border: #dbe4f1;
+      --text: #1f3656;
+      --muted: #62748f;
+      --accent: #2f80ed;
       --accent-soft: #e8f0fe;
-      --shadow-1: 0 8px 24px rgba(0,0,0,0.06);
-      --shadow-2: 0 16px 40px rgba(0,0,0,0.12);
+      --shadow: 0 10px 30px rgba(31, 54, 86, 0.08);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       margin: 0;
-      font-family: 'Google Sans', sans-serif;
-      background: linear-gradient(180deg, #f7f9fc, #eef3f8);
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Google Sans', Arial, sans-serif;
+      background: var(--app-bg);
       color: var(--text);
     }
 
-    /* ===== TOP BAR ===== */
+    /* TOP BAR - matched closer to app */
     .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      height: 72px;
+      height: 78px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f3;
       display: flex;
       align-items: center;
       padding: 0 28px;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #e5e7eb;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 10px rgba(31, 54, 86, 0.04);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
+      min-width: 0;
     }
 
     .brand-logo {
-      height: 36px;
+      height: 42px;
       width: auto;
       display: block;
+      flex: 0 0 auto;
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 34px;
+      background: #d8e1ee;
+      flex: 0 0 auto;
     }
 
     .brand-title {
-      font-size: 16px;
+      font-size: 25px;
+      line-height: 1;
       font-weight: 700;
       letter-spacing: 0.02em;
       text-transform: uppercase;
+      color: #1f3656;
+      white-space: nowrap;
     }
 
-    /* ===== HERO ===== */
-    .hero {
-      max-width: 1200px;
-      margin: auto;
-      padding: 36px 28px 10px;
-    }
-
-    .hero-box {
-      background: rgba(255,255,255,0.85);
-      border-radius: 22px;
+    /* MAIN AREA */
+    .page {
+      background: var(--app-bg);
+      min-height: calc(100vh - 78px);
       padding: 26px;
-      box-shadow: var(--shadow-1);
-      border: 1px solid var(--border);
+    }
+
+    .shell {
+      max-width: 1680px;
+      margin: 0 auto;
+    }
+
+    .hero-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 28px 28px 26px;
+      margin-bottom: 26px;
     }
 
     .hero-title {
-      font-size: 28px;
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.15;
       font-weight: 700;
-      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+      color: #1f3656;
     }
 
     .hero-desc {
-      font-size: 14px;
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.65;
       color: var(--muted);
     }
 
-    /* ===== GRID ===== */
-    .section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px 28px 40px;
-    }
-
-    .section-title {
+    .section-label {
+      margin: 0 0 18px;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #6b7280;
-      margin-bottom: 16px;
+      color: #667892;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 22px;
     }
 
-    /* ===== CARD ===== */
-    .card {
+    .tool-card {
+      position: relative;
       display: block;
       text-decoration: none;
       color: inherit;
-      background: var(--surface);
-      border-radius: 18px;
-      padding: 20px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-1);
-      transition: all 0.2s ease;
-      position: relative;
+      background: #ffffff;
+      border: 1px solid var(--panel-border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 20px 20px 18px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-2);
-      border-color: #c7d2fe;
-    }
-
-    .card::before {
+    .tool-card::before {
       content: "";
       position: absolute;
-      top: 0;
       left: 0;
       right: 0;
+      top: 0;
       height: 4px;
-      border-radius: 18px 18px 0 0;
-      background: linear-gradient(90deg, #1f6fb2, #3b82f6);
+      border-radius: 22px 22px 0 0;
+      background: #2f80ed;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 34px rgba(31, 54, 86, 0.12);
     }
 
     .tag {
-      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 11px;
+      border-radius: 999px;
       background: var(--accent-soft);
       color: var(--accent);
-      padding: 4px 10px;
-      border-radius: 999px;
-      display: inline-block;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    .title {
-      font-size: 16px;
+      font-size: 11px;
       font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .desc {
-      font-size: 13px;
-      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       margin-bottom: 14px;
     }
 
-    .footer {
+    .tool-title {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 700;
+      color: #223a5b;
+    }
+
+    .tool-desc {
+      margin: 0 0 16px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #667892;
+    }
+
+    .tool-footer {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       font-size: 12px;
-      color: #9ca3af;
     }
 
-    .open {
-      font-weight: 600;
-      color: var(--accent);
+    .tool-meta {
+      color: #97a3b6;
+      font-weight: 500;
     }
 
+    .tool-open {
+      color: #2f80ed;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        height: 72px;
+        padding: 0 18px;
+      }
+
+      .brand-logo {
+        height: 36px;
+      }
+
+      .brand-divider {
+        height: 28px;
+      }
+
+      .brand-title {
+        font-size: 20px;
+      }
+
+      .page {
+        padding: 18px;
+      }
+
+      .hero-card {
+        padding: 22px 20px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
-
 </head>
-
 <body>
-
-<!-- ===== HEADER ===== -->
-
-<div class="topbar">
-  <div class="brand">
-    <img src="logo.png" class="brand-logo" alt="MSP Logo">
-    <div class="brand-title">MSP Research Tools</div>
-  </div>
-</div>
-
-<!-- ===== HERO ===== -->
-
-<div class="hero">
-  <div class="hero-box">
-    <div class="hero-title">Research Tools Dashboard</div>
-    <div class="hero-desc">
-      Select a tool to launch. All tools share a consistent interface and design system.
+  <header class="topbar">
+    <div class="brand">
+      <img src="logo.png" class="brand-logo" alt="MSP Logo">
+      <div class="brand-divider"></div>
+      <div class="brand-title">MSP Research Tools</div>
     </div>
-  </div>
-</div>
+  </header>
 
-<!-- ===== TOOLS ===== -->
+  <main class="page">
+    <div class="shell">
+      <section class="hero-card">
+        <h1 class="hero-title">Research Tools Dashboard</h1>
+        <p class="hero-desc">
+          Select a tool to launch.
+        </p>
+      </section>
 
-<div class="section">
-  <div class="section-title">Available Tools</div>
+      <div class="section-label">Available Tools</div>
 
-  <div class="grid">
+      <section class="grid">
+        <a href="https://u3621195.github.io/perceptual-brandmap/" class="tool-card">
+          <div class="tag">Live</div>
+          <h2 class="tool-title">Halo Effect Analyzer</h2>
+          <p class="tool-desc">Analyze attribute influence and bias.</p>
+          <div class="tool-footer">
+            <span class="tool-meta">Brand Analysis</span>
+            <span class="tool-open">Open →</span>
+          </div>
+        </a>
 
-```
-<!-- Halo -->
-<a href="https://u3621195.github.io/perceptual-brandmap/" class="card">
-  <div class="tag">LIVE</div>
-  <div class="title">Halo Effect Analyzer</div>
-  <div class="desc">Analyze attribute influence and bias</div>
-  <div class="footer">
-    <span>Brand Analysis</span>
-    <span class="open">Open →</span>
-  </div>
-</a>
-
-<!-- Sig Test -->
-<a href="https://u3621195.github.io/significance-testing/" class="card">
-  <div class="tag">LIVE</div>
-  <div class="title">Significance Testing Tool</div>
-  <div class="desc">Run statistical comparisons and significance tests</div>
-  <div class="footer">
-    <span>Stat Testing</span>
-    <span class="open">Open →</span>
-  </div>
-</a>
-```
-
-  </div>
-</div>
-
+        <a href="https://u3621195.github.io/significance-testing/" class="tool-card">
+          <div class="tag">Live</div>
+          <h2 class="tool-title">Significance Testing Tool</h2>
+          <p class="tool-desc">Run statistical comparisons and significance tests.</p>
+          <div class="tool-footer">
+            <span class="tool-meta">Stat Testing</span>
+            <span class="tool-open">Open →</span>
+          </div>
+        </a>
+      </section>
+    </div>
+  </main>
 </body>
 </html>
