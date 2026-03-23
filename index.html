@@ -1,45 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>MSP Research Tools</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<title>MSP Research Tools</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --app-bg: #edf2fb;
-      --panel-bg: #ffffff;
-      --panel-border: #dbe4f1;
-      --text: #1f3656;
-      --muted: #62748f;
-      --accent: #2f80ed;
-      --accent-soft: #e8f0fe;
-      --shadow: 0 10px 30px rgba(31, 54, 86, 0.08);
-      --radius-xl: 26px;
-      --radius-lg: 18px;
-    }
+<style>
+:root{
+  --text:#14213D;
+  --muted:#667085;
+  --line:#D7E3F4;
+  --bg:#edf2fb;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+body{
+  margin:0;
+  font-family:'Google Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Google Sans', Arial, sans-serif;
-      background: var(--app-bg);
-      color: var(--text);
-    }
-
-    /* TOP BAR - matched closer to app */
-    .topbar{
+/* NAVBAR MATCHED */
+.topbar{
   height:80px;
   display:flex;
   align-items:center;
@@ -48,279 +32,119 @@
   background:#fff;
   border-bottom:1px solid rgba(191,209,235,.6);
   box-shadow:0 1px 4px rgba(26,115,232,.07);
-  position:sticky;
-  top:0;
-  z-index:1200;
 }
 
-    .brand{
+.brand{
   display:flex;
   align-items:center;
   gap:16px;
-  min-width:0;
 }
 
-    .brand-logo{
+.brand-logo{
   height:52px;
   width:auto;
   display:block;
   object-fit:contain;
 }
 
-    .brand-copy{display:flex;flex-direction:column;gap:2px}
-.brand-desc{
-  font-size:12px;
-  color:#667085;
-  line-height:1.4;
-}
 .brand-divider{
   width:1px;
   height:32px;
-  background:#d7e3f4;
+  background:var(--line);
 }
 
-    .brand-title{
-  font-family:'Google Sans',sans-serif;
-  font-size:24px;
-  font-weight:800;
-  letter-spacing:-.02em;
-  text-transform:uppercase;
-  color:#14213D;
-  line-height:1.05;
-}
-
-    /* MAIN AREA */
-    .page {
-      background: var(--app-bg);
-      min-height: calc(100vh - 78px);
-      padding: 26px;
-    }
-
-    .shell {
-      max-width: 1680px;
-      margin: 0 auto;
-    }
-
-    .hero-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 28px 28px 26px;
-      margin-bottom: 26px;
-    }
-
-    .hero-title {
-      margin: 0 0 8px;
-      font-size: 30px;
-      line-height: 1.15;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: #1f3656;
-    }
-
-    .hero-desc {
-      margin: 0;
-      font-size: 15px;
-      line-height: 1.65;
-      color: var(--muted);
-    }
-
-    .section-label {
-      margin: 0 0 18px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #667892;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 22px;
-    }
-
-    .tool-card {
-      position: relative;
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      background: #ffffff;
-      border: 1px solid var(--panel-border);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      padding: 20px 20px 18px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .tool-card::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 4px;
-      border-radius: 22px 22px 0 0;
-      background: #2f80ed;
-    }
-
-    .tool-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 34px rgba(31, 54, 86, 0.12);
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 5px 11px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .tool-title {
-      margin: 0 0 8px;
-      font-size: 16px;
-      line-height: 1.35;
-      font-weight: 700;
-      color: #223a5b;
-    }
-
-    .tool-desc {
-      margin: 0 0 16px;
-      font-size: 13px;
-      line-height: 1.55;
-      color: #667892;
-    }
-
-    .tool-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 12px;
-    }
-
-    .tool-meta {
-      color: #97a3b6;
-      font-weight: 500;
-    }
-
-    .tool-open {
-      color: #2f80ed;
-      font-weight: 700;
-    }
-
-    @media (max-width: 900px) {
-      .topbar{
-  height:80px;
+.brand-copy{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 24px;
-  background:#fff;
-  border-bottom:1px solid rgba(191,209,235,.6);
-  box-shadow:0 1px 4px rgba(26,115,232,.07);
-  position:sticky;
-  top:0;
-  z-index:1200;
+  flex-direction:column;
+  gap:2px;
 }
 
-      .brand-logo{
-  height:52px;
-  width:auto;
-  display:block;
-  object-fit:contain;
-}
-
-      .brand-copy{display:flex;flex-direction:column;gap:2px}
-.brand-desc{
-  font-size:12px;
-  color:#667085;
-  line-height:1.4;
-}
-.brand-divider{
-  width:1px;
-  height:32px;
-  background:#d7e3f4;
-}
-
-      .brand-title{
-  font-family:'Google Sans',sans-serif;
+.brand-title{
   font-size:24px;
   font-weight:800;
   letter-spacing:-.02em;
   text-transform:uppercase;
-  color:#14213D;
   line-height:1.05;
 }
 
-      .page {
-        padding: 18px;
-      }
+.brand-desc{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.4;
+}
 
-      .hero-card {
-        padding: 22px 20px;
-      }
+/* CONTENT */
+.page{
+  padding:26px;
+}
 
-      .hero-title {
-        font-size: 24px;
-      }
+.hero{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:24px;
+  margin-bottom:20px;
+}
 
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+.hero h1{
+  margin:0 0 8px;
+  font-size:28px;
+}
+
+.hero p{
+  margin:0;
+  color:var(--muted);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:16px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  text-decoration:none;
+  color:inherit;
+}
+
+</style>
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <img src="logo.png" class="brand-logo" alt="MSP Logo">
-      <div class="brand-divider"></div>
-      <div class="brand-copy"><div class="brand-title">MSP RESEARCH TOOLS</div><div class="brand-desc">Access and launch research tools for analysis and statistical testing</div></div>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="logo.png" class="brand-logo">
+    <div class="brand-divider"></div>
+    <div class="brand-copy">
+      <div class="brand-title">MSP RESEARCH TOOLS</div>
+      <div class="brand-desc">Access and launch research tools for analysis and statistical testing</div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main class="page">
-    <div class="shell">
-      <section class="hero-card">
-        <h1 class="hero-title">Research Tools Dashboard</h1>
-        <p class="hero-desc">
-          Select a tool to launch.
-        </p>
-      </section>
+<main class="page">
 
-      <div class="section-label">Available Tools</div>
+<div class="hero">
+  <h1>Research Tools Dashboard</h1>
+  <p>Select a tool to launch.</p>
+</div>
 
-      <section class="grid">
-        <a href="https://u3621195.github.io/perceptual-brandmap/" class="tool-card">
-          <div class="tag">Live</div>
-          <h2 class="tool-title">Halo Effect Analyzer</h2>
-          <p class="tool-desc">Analyze attribute influence and bias.</p>
-          <div class="tool-footer">
-            <span class="tool-meta">Brand Analysis</span>
-            <span class="tool-open">Open →</span>
-          </div>
-        </a>
+<div class="grid">
+  <a class="card" href="https://u3621195.github.io/perceptual-brandmap/">
+    Halo Effect Analyzer
+  </a>
 
-        <a href="https://u3621195.github.io/significance-testing/" class="tool-card">
-          <div class="tag">Live</div>
-          <h2 class="tool-title">Significance Testing Tool</h2>
-          <p class="tool-desc">Run statistical comparisons and significance tests.</p>
-          <div class="tool-footer">
-            <span class="tool-meta">Stat Testing</span>
-            <span class="tool-open">Open →</span>
-          </div>
-        </a>
-      </section>
-    </div>
-  </main>
+  <a class="card" href="https://u3621195.github.io/significance-testing/">
+    Significance Testing Tool
+  </a>
+</div>
+
+</main>
+
 </body>
 </html>
