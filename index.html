@@ -5,7 +5,7 @@
 <title>MSP Research Tools</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -13,25 +13,49 @@
   --muted:#667085;
   --line:#D7E3F4;
   --bg:#edf2fb;
+  --white:#ffffff;
+  --shadow:0 10px 30px rgba(17, 57, 111, 0.08);
+  --shadow-hover:0 18px 38px rgba(17, 57, 111, 0.16);
+  --hero-shadow:0 16px 40px rgba(26,115,232,.10);
+  --radius-xl:28px;
+  --radius-lg:22px;
+  --radius-md:18px;
+  --transition:220ms cubic-bezier(.2,.8,.2,1);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
   margin:0;
   font-family:'Google Sans',sans-serif;
-  background:var(--bg);
   color:var(--text);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(26,115,232,.10), transparent 24%),
+    radial-gradient(circle at 100% 0%, rgba(66,133,244,.08), transparent 22%),
+    radial-gradient(circle at 50% 100%, rgba(26,115,232,.05), transparent 28%),
+    var(--bg);
 }
 
-/* NAVBAR MATCHED */
+/* TOPBAR */
 .topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
   height:80px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 24px;
-  background:#fff;
-  border-bottom:1px solid rgba(191,209,235,.6);
-  box-shadow:0 1px 4px rgba(26,115,232,.07);
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(191,209,235,.7);
+  box-shadow:0 1px 6px rgba(26,115,232,.05);
 }
 
 .brand{
@@ -49,7 +73,7 @@ body{
 
 .brand-divider{
   width:1px;
-  height:32px;
+  height:34px;
   background:var(--line);
 }
 
@@ -62,7 +86,7 @@ body{
 .brand-title{
   font-size:24px;
   font-weight:800;
-  letter-spacing:-.02em;
+  letter-spacing:.02em;
   text-transform:uppercase;
   line-height:1.05;
 }
@@ -70,47 +94,453 @@ body{
 .brand-desc{
   font-size:12px;
   color:var(--muted);
-  line-height:1.4;
+  line-height:1.45;
 }
 
-/* CONTENT */
+/* PAGE */
 .page{
-  padding:26px;
+  max-width:1280px;
+  margin:0 auto;
+  padding:28px;
 }
 
+/* HERO */
 .hero{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:24px;
-  margin-bottom:20px;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.98), rgba(248,251,255,.98));
+  border:1px solid rgba(215,227,244,.95);
+  border-radius:32px;
+  padding:34px 32px;
+  box-shadow:var(--hero-shadow);
+  margin-bottom:22px;
 }
 
-.hero h1{
-  margin:0 0 8px;
-  font-size:28px;
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:auto -80px -80px auto;
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(26,115,232,.14), rgba(26,115,232,0) 70%);
+  pointer-events:none;
 }
 
-.hero p{
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:-100px auto auto -100px;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(66,133,244,.12), rgba(66,133,244,0) 70%);
+  pointer-events:none;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:1.5fr .9fr;
+  gap:24px;
+  align-items:center;
+}
+
+.hero-copy h1{
+  margin:0 0 10px;
+  font-size:34px;
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-.02em;
+}
+
+.hero-copy p{
   margin:0;
+  max-width:760px;
   color:var(--muted);
+  font-size:15px;
+  line-height:1.7;
 }
 
+.hero-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid #dce9fb;
+  box-shadow:0 4px 12px rgba(26,115,232,.06);
+  font-size:12px;
+  font-weight:700;
+  color:#1a73e8;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+.hero-panel{
+  background:linear-gradient(180deg, #ffffff, #f6faff);
+  border:1px solid #dce9fb;
+  border-radius:24px;
+  padding:18px;
+  box-shadow:0 8px 22px rgba(26,115,232,.08);
+}
+
+.hero-panel-title{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.08em;
+  color:#1a73e8;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.hero-panel-list{
+  display:grid;
+  gap:10px;
+}
+
+.hero-panel-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  border-radius:16px;
+  background:#fff;
+  border:1px solid #e5eefc;
+}
+
+.hero-panel-item span:first-child{
+  font-size:14px;
+  font-weight:600;
+}
+
+.hero-panel-item span:last-child{
+  font-size:12px;
+  color:var(--muted);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+/* SECTION HEADING */
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:16px;
+  margin:18px 2px 14px;
+}
+
+.section-head h2{
+  margin:0;
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:-.01em;
+}
+
+.section-head p{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:16px;
+  gap:18px;
 }
 
+/* CARD */
 .card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:18px;
+  position:relative;
+  overflow:hidden;
+  display:block;
   text-decoration:none;
   color:inherit;
+  background:rgba(255,255,255,.92);
+  border:1px solid #dbe7f7;
+  border-radius:24px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
+  isolation:isolate;
 }
 
+.card:hover{
+  transform:translateY(-7px);
+  box-shadow:var(--shadow-hover);
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,0));
+  pointer-events:none;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  right:-70px;
+  top:-70px;
+  background:radial-gradient(circle, var(--glow), transparent 70%);
+  opacity:.7;
+  pointer-events:none;
+  transition:transform var(--transition), opacity var(--transition);
+}
+
+.card:hover::after{
+  transform:scale(1.1);
+  opacity:1;
+}
+
+.card-blue{
+  --accent:#1a73e8;
+  --accent-soft:rgba(26,115,232,.10);
+  --accent-line:rgba(26,115,232,.22);
+  --glow:rgba(26,115,232,.20);
+}
+
+.card-green{
+  --accent:#188038;
+  --accent-soft:rgba(24,128,56,.10);
+  --accent-line:rgba(24,128,56,.22);
+  --glow:rgba(24,128,56,.18);
+}
+
+.card-orange{
+  --accent:#e37400;
+  --accent-soft:rgba(227,116,0,.11);
+  --accent-line:rgba(227,116,0,.22);
+  --glow:rgba(227,116,0,.18);
+}
+
+.card:hover{
+  border-color:var(--accent-line);
+}
+
+.card-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:14px;
+  position:relative;
+  z-index:1;
+}
+
+.icon-wrap{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--accent-soft);
+  color:var(--accent);
+  border:1px solid var(--accent-line);
+  box-shadow:0 6px 14px rgba(0,0,0,.04);
+  flex:0 0 58px;
+}
+
+.card-arrow{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border:1px solid #e4ecf8;
+  color:#8aa2c7;
+  transition:transform var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.card:hover .card-arrow{
+  transform:translateX(4px);
+  color:var(--accent);
+  border-color:var(--accent-line);
+}
+
+.card-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 11px;
+  border-radius:999px;
+  margin-bottom:12px;
+  background:#fff;
+  border:1px solid #e6eef8;
+  color:var(--accent);
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  position:relative;
+  z-index:1;
+}
+
+.card h3{
+  margin:0 0 8px;
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:-.01em;
+  position:relative;
+  z-index:1;
+}
+
+.card-subtitle{
+  margin:0 0 10px;
+  font-size:13px;
+  font-weight:700;
+  color:var(--accent);
+  position:relative;
+  z-index:1;
+}
+
+.card p{
+  margin:0 0 18px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+  position:relative;
+  z-index:1;
+}
+
+.card-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  position:relative;
+  z-index:1;
+}
+
+.card-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid #e6eef8;
+  font-size:11px;
+  font-weight:800;
+  color:var(--text);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.card-cta{
+  font-size:13px;
+  font-weight:700;
+  color:var(--accent);
+}
+
+/* RIPPLE */
+.ripple{
+  position:absolute;
+  border-radius:50%;
+  transform:scale(0);
+  animation:ripple-animation 650ms linear;
+  background:rgba(26,115,232,.18);
+  pointer-events:none;
+  z-index:0;
+}
+
+@keyframes ripple-animation{
+  to{
+    transform:scale(4);
+    opacity:0;
+  }
+}
+
+/* FOOTER */
+.footer{
+  margin-top:24px;
+  padding:18px 6px 10px;
+  color:var(--muted);
+  font-size:13px;
+  text-align:center;
+}
+
+/* ICONS */
+svg{
+  width:26px;
+  height:26px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* RESPONSIVE */
+@media (max-width:980px){
+  .hero-inner{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width:640px){
+  .topbar{
+    height:auto;
+    min-height:80px;
+    padding:14px 16px;
+  }
+
+  .brand{
+    gap:12px;
+  }
+
+  .brand-title{
+    font-size:20px;
+  }
+
+  .brand-desc{
+    font-size:11px;
+  }
+
+  .brand-divider{
+    display:none;
+  }
+
+  .page{
+    padding:18px;
+  }
+
+  .hero{
+    padding:24px 20px;
+    border-radius:26px;
+  }
+
+  .hero-copy h1{
+    font-size:28px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 
@@ -118,10 +548,10 @@ body{
 
 <header class="topbar">
   <div class="brand">
-    <img src="logo.png" class="brand-logo">
+    <img src="logo.png" class="brand-logo" alt="MSP Logo">
     <div class="brand-divider"></div>
     <div class="brand-copy">
-      <div class="brand-title">MSP RESEARCH TOOLS</div>
+      <div class="brand-title">MSP Research Tools</div>
       <div class="brand-desc">Access and launch research tools for analysis and statistical testing</div>
     </div>
   </div>
@@ -129,22 +559,165 @@ body{
 
 <main class="page">
 
-<div class="hero">
-  <h1>Research Tools Dashboard</h1>
-  <p>Select a tool to launch.</p>
-</div>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1>Research Tools Dashboard</h1>
+        <p>
+          A centralized workspace for launching MSP analytics applications. Access advanced tools for
+          brand diagnostics, statistical validation, and performance gap analysis in one clean interface.
+        </p>
 
-<div class="grid">
-  <a class="card" href="https://u3621195.github.io/perceptual-brandmap/">
-    Halo Effect Analyzer
-  </a>
+        <div class="hero-badges">
+          <div class="hero-badge">Modern UI</div>
+          <div class="hero-badge">Statistical Tools</div>
+          <div class="hero-badge">Fast Access</div>
+        </div>
+      </div>
 
-  <a class="card" href="https://u3621195.github.io/significance-testing/">
-    Significance Testing Tool
-  </a>
-</div>
+      <div class="hero-panel">
+        <div class="hero-panel-title">Available Applications</div>
+        <div class="hero-panel-list">
+          <div class="hero-panel-item">
+            <span>Halo Effect Analyzer</span>
+            <span>Analysis</span>
+          </div>
+          <div class="hero-panel-item">
+            <span>Significance Testing Tool</span>
+            <span>Testing</span>
+          </div>
+          <div class="hero-panel-item">
+            <span>Penalty Analysis</span>
+            <span>Diagnostics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <div>
+      <h2>Launch Applications</h2>
+      <p>Select a tool below to open the corresponding application.</p>
+    </div>
+  </div>
+
+  <section class="grid">
+
+    <a class="card card-blue ripple-card" href="https://u3621195.github.io/perceptual-brandmap/" target="_blank">
+      <div class="card-top">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 19L10 13L14 16L20 8"></path>
+            <path d="M20 8H15"></path>
+            <path d="M20 8V13"></path>
+          </svg>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+
+      <div class="card-kicker">Brand Diagnostics</div>
+      <h3>Halo Effect Analyzer</h3>
+      <div class="card-subtitle">Perception mapping and halo-adjusted analysis</div>
+      <p>
+        Explore brand image relationships, uncover halo influence, and review adjusted perception
+        patterns to support clearer interpretation.
+      </p>
+
+      <div class="card-footer">
+        <span class="card-tag">Analysis Tool</span>
+        <span class="card-cta">Open Tool</span>
+      </div>
+    </a>
+
+    <a class="card card-green ripple-card" href="https://u3621195.github.io/significance-testing/" target="_blank">
+      <div class="card-top">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 17V10"></path>
+            <path d="M10 17V7"></path>
+            <path d="M15 17V13"></path>
+            <path d="M20 17V5"></path>
+            <path d="M3 19H21"></path>
+          </svg>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+
+      <div class="card-kicker">Statistical Validation</div>
+      <h3>Significance Testing Tool</h3>
+      <div class="card-subtitle">Confidence-based comparison and testing workflow</div>
+      <p>
+        Run statistical significance checks, compare results with confidence thresholds,
+        and validate key differences in a streamlined format.
+      </p>
+
+      <div class="card-footer">
+        <span class="card-tag">Testing Tool</span>
+        <span class="card-cta">Open Tool</span>
+      </div>
+    </a>
+
+    <a class="card card-orange ripple-card" href="https://u3621195.github.io/penalty-analysis/" target="_blank">
+      <div class="card-top">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 18L9 12L13 15L20 7"></path>
+            <path d="M20 7V12"></path>
+            <path d="M20 7H15"></path>
+            <path d="M4 20H20"></path>
+          </svg>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+
+      <div class="card-kicker">Performance Gaps</div>
+      <h3>Penalty Analysis</h3>
+      <div class="card-subtitle">Attribute penalty review and action prioritization</div>
+      <p>
+        Identify underperforming attributes, quantify penalty impact, and highlight areas
+        where improvement can drive stronger overall performance.
+      </p>
+
+      <div class="card-footer">
+        <span class="card-tag">Diagnostic Tool</span>
+        <span class="card-cta">Open Tool</span>
+      </div>
+    </a>
+
+  </section>
+
+  <div class="footer">
+    © MSP Research Tools | Market Support Co., Ltd.
+  </div>
 
 </main>
+
+<script>
+document.querySelectorAll('.ripple-card').forEach(card => {
+  card.addEventListener('click', function(e){
+    const ripple = document.createElement('span');
+    const rect = this.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = e.clientX - rect.left - size / 2;
+    const y = e.clientY - rect.top - size / 2;
+
+    ripple.className = 'ripple';
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = x + 'px';
+    ripple.style.top = y + 'px';
+
+    const existingRipple = this.querySelector('.ripple');
+    if(existingRipple) existingRipple.remove();
+
+    this.appendChild(ripple);
+
+    setTimeout(() => {
+      ripple.remove();
+    }, 650);
+  });
+});
+</script>
 
 </body>
 </html>
